@@ -1,0 +1,51 @@
+<h1>Infos Client</h1>
+Nom : {{ nom }} <br />
+Age : {{ age }} <br />
+Couleur : {{ couleur }} <br />
+<img src="{{ pathImage }}" style="width: 200px; height: 200px" /><br />
+Un bloc div ayant la même couleur que celle du client
+<div
+  style="width: 200px; height: 200px"
+  [style.background-color]="couleur"
+></div>
+
+<select #c1 (change)="changerCouleur(c1)">
+  <option value="red">Rouge</option>
+  <option value="blue">Bleu</option>
+  <option value="orange">orange</option>
+  <option value="green">vert</option>
+  <option value="pink">rose</option>
+</select>
+<br />
+saisir lage<input type="number" #a />
+<br />
+nom du client<input type="text" [(ngModel)]="nom" />
+<br />
+<button (click)="changerAge(a)">changerAge</button>
+
+<br />
+
+<button (click)="afficher()">Afficher</button>
+
+<h3>Les adresses du client</h3>
+<ul *ngFor="let item of lesadresses">
+  <li>{{ item }}</li>
+</ul>
+<h3>Prix des achats</h3>
+<table border="1">
+  <tr>
+    <th>Indice</th>
+    <th>Prix</th>
+  </tr>
+  <tr *ngFor="let p of prixAchats; let i = index">
+    <td>{{ i }}</td>
+    <td>{{ p }}</td>
+  </tr>
+</table>
+<p *ngIf="age > 25">payer par carte</p>
+<button *ngIf="active">Acheter</button>
+
+<h3>Etat du solde</h3>
+<div *ngIf="solde<=0; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>Recharge Immédiate</ng-template>
+<ng-template #elseBlock> Recharge le plutôt possible</ng-template>
